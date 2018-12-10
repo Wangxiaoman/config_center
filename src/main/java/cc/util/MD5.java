@@ -1,4 +1,4 @@
-package cc.linkedme.util;
+package cc.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

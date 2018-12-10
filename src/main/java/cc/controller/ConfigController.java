@@ -1,4 +1,4 @@
-package cc.linkedme.controller;
+package cc.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import cc.linkedme.constants.CommonStatus;
-import cc.linkedme.constants.Constants;
-import cc.linkedme.constants.ResultJson;
-import cc.linkedme.service.AppConfigService;
-import cc.linkedme.util.MD5;
+import cc.constants.CommonStatus;
+import cc.constants.Constants;
+import cc.constants.ResultJson;
+import cc.service.AppConfigService;
+import cc.util.MD5;
 
 
 @RestController

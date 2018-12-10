@@ -1,4 +1,4 @@
-package cc.linkedme.util;
+package cc.util;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

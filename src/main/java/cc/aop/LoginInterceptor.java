@@ -1,20 +1,13 @@
-package cc.linkedme.aop;
-
-import java.io.IOException;
-import java.io.PrintWriter;
+package cc.aop;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import cc.linkedme.constants.CommonStatus;
-import cc.linkedme.constants.ResultJson;
-
 public class LoginInterceptor extends HandlerInterceptorAdapter {
-    private static final Logger LOGGER = Logger.getLogger(LoginInterceptor.class);
+//    private static final Logger LOGGER = Logger.getLogger(LoginInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
@@ -45,13 +38,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         return loginRequired;
     }
 
-    private boolean flush(CommonStatus commonStatus, HttpServletResponse response)
-            throws IOException {
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
-        PrintWriter printWriter = response.getWriter();
-        printWriter.write(new ResultJson(commonStatus).toJson().toString());
-        printWriter.flush();
-        return false;
-    }
+//    private boolean flush(CommonStatus commonStatus, HttpServletResponse response)
+//            throws IOException {
+//        response.setCharacterEncoding("UTF-8");
+//        response.setContentType("application/json");
+//        PrintWriter printWriter = response.getWriter();
+//        printWriter.write(new ResultJson(commonStatus).toJson().toString());
+//        printWriter.flush();
+//        return false;
+//    }
 }

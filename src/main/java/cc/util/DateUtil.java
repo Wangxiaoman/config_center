@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 HUAPU (http://www.huapu.com) 
  */
-package cc.linkedme.util;
+package cc.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

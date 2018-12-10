@@ -1,4 +1,4 @@
-package cc.linkedme.constants;
+package cc.constants;
 
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package cc.linkedme.zkclient;
+package cc.zkclient;
 
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import cc.linkedme.constants.Constants;
+import cc.constants.Constants;
 
 
 @Service

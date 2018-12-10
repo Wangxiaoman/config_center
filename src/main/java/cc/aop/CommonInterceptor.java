@@ -1,4 +1,4 @@
-package cc.linkedme.aop;
+package cc.aop;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

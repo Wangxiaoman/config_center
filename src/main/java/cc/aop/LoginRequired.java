@@ -1,4 +1,4 @@
-package cc.linkedme.aop;
+package cc.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

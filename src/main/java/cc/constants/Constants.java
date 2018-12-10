@@ -1,4 +1,4 @@
-package cc.linkedme.constants;
+package cc.constants;
 
 public class Constants {
     public static final String APP_PATH = "/appconfig";
