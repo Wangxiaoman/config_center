@@ -4,17 +4,16 @@ import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
-import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
-import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
-import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -28,13 +27,10 @@ public class ZkConfigService {
     private static Logger LOGGER = LoggerFactory.getLogger(ZkConfigService.class);
     private static final String ACTIVE_APP = "active";
     private static final Charset charset = Charset.forName("UTF-8");
-
-
-    // 使用自己的线程池，默认接口中如果zk断掉的情况下，每次重连会重新创建一个线程池
-//    private final static ThreadPoolExecutor executor = new ThreadPoolExecutor(20, 100, 5l, TimeUnit.SECONDS,
-//            new LinkedBlockingQueue<Runnable>(100), new ThreadPoolExecutor.CallerRunsPolicy());
     private PathChildrenCache childrenCache;
-    private CuratorFramework client = null;
+    
+    @Resource(name="zkClient")
+    private CuratorFramework client;
 
     private static Map<String, String> params = new ConcurrentHashMap<>();
     
@@ -70,10 +66,9 @@ public class ZkConfigService {
         return defaultValue;
     }
 
-    private ZkConfigService(@Value("${zk.connection}") String connectionString) {
+    @PostConstruct
+    public void init() {
         try {
-            client = createWithOptions(connectionString, new ExponentialBackoffRetry(1000, 3), 3000, 5000);
-            client.start();
             watchChild(Constants.APP_PATH + "/" + ACTIVE_APP, client);
         } catch (Exception ex) {
             LOGGER.error("create zk client error,ex:", ex);
@@ -86,15 +81,6 @@ public class ZkConfigService {
         childrenCache.getListenable().addListener(listener);
         childrenCache.start();
     }
-
-    private static CuratorFramework createWithOptions(String connectionString, RetryPolicy retryPolicy, int connectionTimeoutMs,
-            int sessionTimeoutMs) {
-        return CuratorFrameworkFactory.builder().connectString(connectionString).retryPolicy(retryPolicy)
-                .connectionTimeoutMs(connectionTimeoutMs).sessionTimeoutMs(sessionTimeoutMs)
-                // etc. etc.
-                .build();
-    }
-
 
     static class ZkPathListener implements PathChildrenCacheListener {
         @Override

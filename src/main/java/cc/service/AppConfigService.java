@@ -20,7 +20,7 @@ public class AppConfigService {
     @Value("${zk.connection}")
     private String connectionString;
     
-    @Resource
+    @Resource(name="zkClient")
     private CuratorFramework client;
 
     public List<String> getApps() throws Exception {

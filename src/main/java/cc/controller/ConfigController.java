@@ -45,7 +45,7 @@ public class ConfigController {
 
     @PostMapping("/apps")
     public ResultJson postApps(@RequestParam(value = "time", required = true) long time,
-            @RequestParam(value = "sign", required = true) String sign, 
+            @RequestParam(value = "sign", required = true) String sign,
             @RequestParam(value = "appName", required = true) String appName) {
         if (!auth(time, sign)) {
             return new ResultJson(CommonStatus.NO_AUTH);
@@ -61,7 +61,8 @@ public class ConfigController {
 
     @GetMapping("/apps/configs")
     public ResultJson getAppConfigs(@RequestParam(value = "time", required = true) long time,
-            @RequestParam(value = "sign", required = true) String sign, @RequestParam(value = "appName", required = true) String appName) {
+            @RequestParam(value = "sign", required = true) String sign,
+            @RequestParam(value = "appName", required = true) String appName) {
         if (!auth(time, sign)) {
             return new ResultJson(CommonStatus.NO_AUTH);
         }
@@ -76,9 +77,9 @@ public class ConfigController {
 
     @PostMapping("/apps/configs")
     public ResultJson saveAppConfigs(@RequestParam(value = "time", required = true) long time,
-            @RequestParam(value = "sign", required = true) String sign, 
+            @RequestParam(value = "sign", required = true) String sign,
             @RequestParam(value = "appName", required = true) String appName,
-            @RequestParam(value = "key", required = true) String key, 
+            @RequestParam(value = "key", required = true) String key,
             @RequestParam(value = "value", required = true) String value,
             @RequestParam(value = "state", required = true, defaultValue = "0") int state) {
         if (!auth(time, sign)) {
@@ -96,13 +97,13 @@ public class ConfigController {
             return new ResultJson(CommonStatus.SERVER_ERROR);
         }
     }
-    
+
     private static boolean auth(long time, String sign) {
         return MD5.getMD5Code(Constants.PUB_KEY + time).equals(sign);
     }
-    
+
     @GetMapping("/pubkey")
-    public ResultJson getPubKey(){
-        return new ResultJson(CommonStatus.SUCCESS,Constants.PUB_KEY);
+    public ResultJson getPubKey() {
+        return new ResultJson(CommonStatus.SUCCESS, Constants.PUB_KEY);
     }
 }
