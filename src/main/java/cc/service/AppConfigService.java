@@ -47,6 +47,11 @@ public class AppConfigService {
         return 1;
     }
     
+    public int removeAppNode(String appName,String key) throws Exception{
+        client.delete().forPath(Constants.APP_PATH+"/"+appName+"/"+key);
+        return 1;
+    }
+    
     
     private List<String> getChild(String path) throws Exception{
         List<String> children = client.getChildren().forPath(Constants.APP_PATH);
